@@ -12,6 +12,13 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="jscharts.js"></script>
+    <script type="text/javascript">
+          var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
+          var myChart = new JSChart('chartcontainer', 'line');
+          myChart.setDataArray(myData);
+          myChart.draw();
+    </script>
   
 
 </head>
@@ -23,6 +30,8 @@
           
     </center>
 
+
+</div>
 
     <div class="container"> <!-- main div -->
 
@@ -37,15 +46,16 @@
                Auto-Complete</button>
 
           &nbsp; &nbsp; &nbsp; &nbsp;
-                  <button type="button" class="btn btn-primary" style="color: white" onclick="location.href='http://www.edaplayground.com/w/x/Fi'"> Simulate </button>
+                  <button type="button" class="btn btn-primary" style="color: white" onclick="location.href='graph.html'"> Simulate </button>
                &nbsp; &nbsp; &nbsp; &nbsp;
-	<br><br>
+
+<br><br>
                                     <div id="experiment_space"></div>
 
             </div>
             
  
-   <br>
+   <br><br>
 
       <div class="row">
       <div class="col-sm-2">
