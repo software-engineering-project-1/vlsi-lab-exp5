@@ -1,14 +1,344 @@
-<html>
-	<head>
-		
-	</head>
-	<body>
-		<center>
-			<p><center><h3 style="background-color: navy ; color: white ; height : 40px "><sub> Simulation on Circuit</sub></h3>
-			</center></p>
-			<img width="800" height="450" src="graph(1).jpg">
-			
-		</center>
-	</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
+
+    <style>
+        .axis path {
+            fill: none;
+            stroke: #777;
+            shape-rendering: crispEdges;
+        }
+        .axis text {
+            font-family: Lato;
+            font-size: 13px;
+        }
+        .grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+.   </style>
+
+</head>
+
+<body>
+<center>
+<h3 style="background-color: navy ; margin-top: 0px; color: white ; height : 40px ; width:100%" > <sub>SIMULATION OF CIRCUIT</sub> </h3>
+
+
+    <div class="container">
+    
+        <div class="jumbotron">
+
+            <svg id="visualisation" width="1000" height="800"></svg>
+            <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            <script>
+                function InitChart() {
+                    var data = [{
+                        "sale": "12",
+                        "year": "0"
+                    }, {
+                        "sale": "12",
+                        "year": "1"
+                    }, {
+                        "sale": "18",
+                        "year": "2"
+                    }, {
+                        "sale": "18",
+                        "year": "3"
+                    }, {
+                        "sale": "12",
+                        "year": "4"
+                    }, {
+                        "sale": "12",
+                        "year": "5"
+                    }, {
+                        "sale": "18",
+                        "year": "6"
+                    }, {
+                        "sale": "18",
+                        "year": "7"
+                    }, {
+                        "sale": "12",
+                        "year": "8"
+                    }, {
+                        "sale": "12",
+                        "year": "9"
+                    }, {
+                        "sale": "18",
+                        "year": "10"
+                    }, {
+                        "sale": "18",
+                        "year": "11"
+                    }, {
+                        "sale": "12",
+                        "year": "12"
+                    }, {
+                        "sale": "12",
+                        "year": "13"
+                    }, {
+                        "sale": "18",
+                        "year": "14"
+                    }, {
+                        "sale": "18",
+                        "year": "15"
+                    }, {
+                        "sale": "12",
+                        "year": "16"
+                    }, {
+                        "sale": "12",
+                        "year": "17"
+                    }, {
+                        "sale": "18",
+                        "year": "18"
+                    }, {
+                        "sale": "18",
+                        "year": "19"
+                    }, {
+                        "sale": "12",
+                        "year": "20"
+                    }, {
+                        "sale": "12",
+                        "year": "21"
+                    }, {
+                        "sale": "18",
+                        "year": "22"
+                    }, {
+                        "sale": "18",
+                        "year": "23"
+                    }, {
+                        "sale": "12",
+                        "year": "24"
+                    }, {
+                        "sale": "12",
+                        "year": "25"
+                    }];
+
+
+                    var data2 = [{
+                        "sale": "10",
+                        "year": "0"
+                    }, {
+                        "sale": "10",
+                        "year": "1"
+                    }, {
+                        "sale": "4",
+                        "year": "2"
+                    }, {
+                        "sale": "4",
+                        "year": "3"
+                    }, {
+                        "sale": "10",
+                        "year": "4"
+                    }, {
+                        "sale": "10",
+                        "year": "5"
+                    }, {
+                        "sale": "4",
+                        "year": "6"
+                    }, {
+                        "sale": "4",
+                        "year": "7"
+                    }, {
+                        "sale": "10",
+                        "year": "8"
+                    }, {
+                        "sale": "10",
+                        "year": "9"
+                    }, {
+                        "sale": "4",
+                        "year": "10"
+                    }, {
+                        "sale": "4",
+                        "year": "11"
+                    }, {
+                        "sale": "10",
+                        "year": "12"
+                    }, {
+                        "sale": "10",
+                        "year": "13"
+                    }, {
+                        "sale": "4",
+                        "year": "14"
+                    }, {
+                        "sale": "4",
+                        "year": "15"
+                    }, {
+                        "sale": "10",
+                        "year": "16"
+                    }, {
+                        "sale": "10",
+                        "year": "17"
+                    }, {
+                        "sale": "4",
+                        "year": "18"
+                    }, {
+                        "sale": "4",
+                        "year": "19"
+                    }, {
+                        "sale": "10",
+                        "year": "20"
+                    }, {
+                        "sale": "10",
+                        "year": "21"
+                    }, {
+                        "sale": "4",
+                        "year": "22"
+                    }, {
+                        "sale": "4",
+                        "year": "23"
+                    }, {
+                        "sale": "10",
+                        "year": "24"
+                    }, {
+                        "sale": "10",
+                        "year": "25"
+                    }];
+
+
+
+                    var vis = d3.select("#visualisation"),
+                        WIDTH = 500,
+                        HEIGHT = 450,
+                        MARGINS = {
+                            top: 20,
+                            right: 20,
+                            bottom: 20,
+                            left: 50
+                        },
+
+                        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 25]),
+
+                        yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 20]),
+
+                        xAxis = d3.svg.axis()
+                        .scale(xScale),
+
+                        yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left");
+
+
+                        vis.append("text")      // text label for the x axis
+                            .attr("x", 280 )
+                            .attr("y",  500 )
+                            .style("text-anchor", "")
+                            .text("Time -->");
+                        
+                        // vis.append("text")
+                        // .attr("x", width / 2 )
+                        // .attr("y",  height + margin.bottom)
+
+                        // vis.append("text")
+                        //     // .attr("transform", "rotate(-90)")
+                        //     // .attr("y", 0 – margin.left)
+                        //     // .attr("x",0 - (height / 2))
+                        //     // .attr("dy", "1em")
+                        //     .style("text-anchor", "middle")
+                        //     .text("In");
+
+                        // vis.append("g")         // Add the Y Axis
+                        //    .attr("class", "y axis")
+                        //     .call(yAxis);
+
+                            // PUT THE NEW CODE HERE!
+
+                            
+
+                    vis.append("svg:g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+                        .call(xAxis);
+
+
+                    vis.append("svg:g")
+                        .attr("class", "y axis")
+                        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+                        .call(yAxis);
+
+                    var lineGen = d3.svg.line()
+                        .x(function(d) {
+                            return xScale(d.year);
+                        })
+                        .y(function(d) {
+                            return yScale(d.sale);
+                        })
+                        .interpolate("basis");
+
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data))
+                        .attr('stroke', 'blue')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+
+
+                    vis.append('svg:path')
+                        .attr('d', lineGen(data2))
+                        .attr('stroke', 'red')
+                        .attr('stroke-width', 2)
+                        .attr('fill', 'none');
+                        
+                    var grid = d3.layout.grid()
+                          .width(1000)
+                          .height(450)
+                          .data(data)
+                          .groupBy('color')
+                         
+
+//                      function make_x_axis() {        
+//     return d3.svg.axis()
+//         .scale(x)
+//          .orient("bottom")
+//          .ticks(5)
+// }
+
+// function make_y_axis() {        
+//     return d3.svg.axis()
+//         .scale(y)
+//         .orient("left")
+//         .ticks(5)
+// }
+
+// //  <== Put the functions here!
+// // Get the data
+// d3.vis("data/data.tsv", function(error, data) {
+//     data.forEach(function(d) {
+//         d.date = parseDate(d.date);
+//         d.close = +d.close;
+//     });
+
+//     vis.append("g")         
+//         .attr("class", "grid")
+//         .attr("transform", "translate(0," + height + ")")
+//         .call(make_x_axis()
+//             .tickSize(-height, 0, 0)
+//             .tickFormat("")
+//         )
+
+//     vis.append("g")         
+//         .attr("class", "grid")
+//         .call(make_y_axis()
+//             .tickSize(-width, 0, 0)
+//             .tickFormat("")
+//         )
+
+//         .tickFormat("")   
+
+
+
+
+                }
+                InitChart();
+            </script>
+        </div>
+
+    </div>
+</center>
+</body>
+
+</html>
